@@ -4,7 +4,7 @@ from typing import Optional, Type
 
 class CleanUpFile:
     def __init__(self, filename: str) -> None:
-        self.filename = filename 
+        self.filename = filename
         self.file = None
 
     def __enter__(self) -> "CleanUpFile":
@@ -33,8 +33,10 @@ class CleanUpFile:
             if os.path.exists(self.filename):
                 os.remove(self.filename)
         except FileNotFoundError:
-            print(f"Error: File '{self.filename}' was not found during deletion.")
+            print(f"Error: File '{self.filename}' "
+                  f"was not found during deletion.")
         except PermissionError:
-            print(f"Error: Permission denied when trying to delete '{self.filename}'.")
+            print(f"Error: Permission denied when "
+                  f"trying to delete '{self.filename}'.")
         except IOError as e:
             print(f"An I/O error occurred while deleting the file: {e}")
