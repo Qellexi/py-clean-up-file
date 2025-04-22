@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Optional, Type
+from typing import Optional, Type, TextIO
 
 
 class CleanUpFile:
@@ -9,7 +9,7 @@ class CleanUpFile:
         self.file_name = file_name
         self.file = None
 
-    def __enter__(self):
+    def __enter__(self) -> TextIO:
         try:
             self.file = open(self.file_name, "r")
         except FileNotFoundError:
