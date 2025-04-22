@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import os
-from typing import TextIO, Optional, Type
+from typing import Optional, Type
 
 
 class CleanUpFile:
@@ -7,12 +9,13 @@ class CleanUpFile:
         self.file_name = file_name
         self.file = None
 
-    def __enter__(self) -> TextIO:
+    def __enter__(self) -> CleanUpFile:
         self.file = open(self.file_name)
-        return self.file
+        return self
 
     def __exit__(self, exc_type: Optional[Type[BaseException]],
                  exc_val: Optional[BaseException],
                  exc_tb: Optional[object]) -> None:
-        self.file.close()
+        if self.file:
+            self.file.close()
         os.remove(self.file_name)
