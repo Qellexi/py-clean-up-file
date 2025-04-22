@@ -11,6 +11,8 @@ class CleanUpFile:
         self.file = open(self.file_name)
         return self.file
 
-    def __exit__(self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], exc_tb: Optional[object]) -> None:
+    def __exit__(self, exc_type: Optional[Type[BaseException]], 
+                 exc_val: Optional[BaseException], 
+                 exc_tb: Optional[object]) -> None:
         self.file.close()
         os.remove(self.file_name)
